@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>@CeruleanKass</title>
+
   <style>
     body {
       margin: 0;
@@ -43,6 +44,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: zoom-in;
     }
 
     .gallery img:hover {
@@ -56,8 +58,28 @@
       color: #666;
       font-size: 0.9rem;
     }
+
+    /* --- Lightbox styles (added) --- */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      cursor: zoom-out;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
+
 <body>
   <header>
     <h1>References</h1>
@@ -65,7 +87,6 @@
 
   <main>
     <div class="gallery">
-      <!-- Replace src values with your own image paths or URLs -->
       <img src="images/butt_grab_1.png" alt="Photo 1" />
       <img src="images/butt_grab_2.png" alt="Photo 2" />
       <img src="images/futa-physique1.png" alt="Photo 3" />
@@ -78,8 +99,29 @@
     </div>
   </main>
 
-  <footer>
-  </footer>
+  <footer></footer>
+
+  <!-- Lightbox markup (added) -->
+  <div id="lightbox">
+    <img id="lightbox-img" />
+  </div>
+
+  <!-- Lightbox script (added) -->
+  <script>
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    document.querySelectorAll(".gallery img").forEach(img => {
+      img.addEventListener("click", () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
+      });
+    });
+
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
+  </script>
 </body>
 </html>
 
